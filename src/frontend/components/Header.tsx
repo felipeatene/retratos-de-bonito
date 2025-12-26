@@ -6,7 +6,9 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="text-xl font-bold">Retratos de Bonito</Link>
         <nav className="space-x-4">
-          <Link href="/search" className="text-sm text-gray-600">Buscar</Link>
+          <Link href="/search" className="text-sm text-gray-600 hover:text-gray-900">Buscar</Link>
+          <Link href="/expo" className="text-sm text-gray-600 hover:text-gray-900">Modo Exposição</Link>
+          <Link href="/contribuir" className="text-sm text-gray-600 hover:text-gray-900">Contribuir</Link>
         </nav>
       </div>
     </header>

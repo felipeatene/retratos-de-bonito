@@ -2,102 +2,146 @@
 
 # 🌿📸 Retratos de Bonito 💧
 
-### Acervo Fotográfico Cultural • Memória • Identidade • Pertencimento
+**Museu Digital Comunitário**
 
-Preservação da memória visual de Bonito (MS),  
-com acesso seguro, consentido e uso ético da tecnologia.
+Preservação da memória visual de Bonito (MS) com acesso seguro, consentido e ético.
 
 </div>
 
 ---
 
-## 🚀 Quickstart
+## 🚀 Início Rápido
 
-### Windows
+### ⚠️ Pré-requisitos
+
+1. ✅ **Python 3.10+** (você já tem instalado)
+2. ❌ **Node.js 18+** — **[CLIQUE PARA INSTALAR](https://nodejs.org/)** (necessário para frontend)
+
+### Modo Automático (Recomendado)
+
+#### Windows
 ```cmd
-run.bat
+# Terminal 1 — Backend (FastAPI)
+run_back.bat
+
+# Terminal 2 — Frontend (Next.js) — após instalar Node.js
+run_front.bat
 ```
 
-### Linux / Mac
+#### Linux / Mac
 ```bash
 bash run.sh
 ```
 
-Acesse:
-- **Frontend:** http://127.0.0.1:3000
-- **API:** http://127.0.0.1:8000
-- **Docs:** http://127.0.0.1:8000/docs
+Isso inicia:
+- **Backend API:** http://localhost:8000/docs
+- **Frontend:** http://localhost:3000
 
-### 🖥️ Modo Exposição
-- **URL:** http://127.0.0.1:3000/expo
-- **Fonte de dados:** GET /public/expo?mode=timeline
-- **Config:** defina `NEXT_PUBLIC_API_URL` apontando para a API (ex.: `http://127.0.0.1:8000`)
+### Modo Manual (Desenvolvimento)
+
+Veja instruções detalhadas em:
+- **[INSTALAR.md](INSTALAR.md)** — Guia de instalação completo
+- **[Backend — Guia de Setup](src/app/README.md)**
+- **[Frontend — Guia de Setup](src/frontend/README.md)**
 
 ---
 
 ## 📁 Estrutura do Projeto
 
 ```
-src/
-├── app/                       # FastAPI Backend
-│   ├── main.py               # Entry point
-│   ├── database.py           # SQLite + SQLAlchemy
-│   ├── models/               # ORM (Photo, Person, Story, etc)
-│   ├── schemas/              # Pydantic schemas
-│   ├── repositories/         # Camada de dados
-│   ├── services/             # Lógica de negócio
-│   └── routers/              # Endpoints
-├── alembic/                  # Migrações de BD
-├── frontend_static/          # Frontend (HTML + JS estático)
-│   ├── index.html            # Timeline
-│   ├── search.html           # Busca pública
-│   ├── photo.html            # Detalhe + histórias
-│   └── api.js                # Helpers de fetch
-└── README.md
-
-scripts/                       # Utilitários (import, testes)
-storage/                       # Fotos originais
-retratos.db                    # Banco SQLite
+retratos-de-bonito/
+├── src/
+│   ├── app/                    # Backend FastAPI
+│   │   ├── main.py
+│   │   ├── models/             # ORM
+│   │   ├── repositories/       # Acesso a dados
+│   │   ├── routers/            # Endpoints
+│   │   └── README.md           # 👈 Instruções backend
+│   │
+│   └── frontend/               # Frontend Next.js
+│       ├── app/
+│       ├── components/
+│       ├── config/
+│       └── README.md           # 👈 Instruções frontend
+│
+├── alembic/                    # Migrações BD
+├── scripts/                    # Utilitários
+├── storage/photos/             # Armazenamento de fotos
+├── retratos.db                 # Banco de dados SQLite
+└── README.md                   # Este arquivo
 ```
 
 ---
 
-## 🔗 Endpoints Principais
+## 📖 Documentação
 
-A partir desse cadastro, o sistema realiza a comparação entre as imagens de referência e o acervo fotográfico existente, possibilitando que cada usuário visualize fotografias em que aparece, respeitando critérios de privacidade e permissões de acesso.
-
-O projeto também permite a inclusão colaborativa de fotografias, contribuindo para a ampliação e diversificação do acervo histórico da cidade.
-
----
-
-## 4. Privacidade, Ética e Consentimento
-
-O **Retratos de Bonito** adota princípios rigorosos de proteção de dados e respeito à privacidade, especialmente no que se refere a informações biométricas.
-
-As diretrizes fundamentais incluem:
-- Uso de reconhecimento facial exclusivamente mediante consentimento explícito
-- Tratamento de dados biométricos como informações sensíveis
-- Ausência de disponibilização pública irrestrita de imagens
-- Controle de acesso às fotografias com base em permissões
-- Possibilidade de exclusão de dados mediante solicitação do usuário
-
-O projeto está alinhado aos princípios da legislação brasileira de proteção de dados pessoais (LGPD) e às boas práticas de ética digital.
-
-Mais informações podem ser encontradas na documentação específica em `docs/privacy.md`.
+| Documento | Objetivo |
+|-----------|----------|
+| [Backend README](src/app/README.md) | Setup, rotas, desenvolvimento |
+| [Frontend README](src/frontend/README.md) | Setup, componentes, build |
+| [Guia de Modo Exposição](src/frontend/EXPO.md) | Visualização imersiva |
+| [QR Temático](src/frontend/QR_TEMATICO.md) | Integração QR codes |
+| [Fluxo de Contribuição](src/frontend/CONTRIBUICAO.md) | Upload comunitário |
 
 ---
 
-## 5. Caráter Cultural do Projeto
+## 🎯 Funcionalidades Principais
 
-O **Retratos de Bonito** não se configura como uma rede social, plataforma de vigilância ou ferramenta de monitoramento.
+### 🔍 Busca Pública
+- Busca por descrição, local, período
+- Sem necessidade de login
+- Resultados respeitam visibilidade
 
-Trata-se de um projeto de caráter cultural, histórico e comunitário, cujo foco é a preservação da memória coletiva, o fortalecimento da identidade local e o acesso consciente ao patrimônio visual da cidade.
+### 📷 Upload Comunitário
+- 3 etapas acolhedoras
+- Consentimento explícito
+- Curadoria manual antes de publicar
+
+### 🎥 Modo Exposição
+- Timeline imersiva em tela cheia
+- Ken Burns effect suave
+- QR codes temáticos
+- Ideal para museus, escolas, eventos
+
+### 🔒 Privacidade & Ética
+- Consentimento obrigatório
+- Visibilidade controlada
+- LGPD compliant
+- Sem vigilância
 
 ---
 
-## 6. Tecnologias Utilizadas
+## 🛠️ Tecnologias
 
-O projeto é desenvolvido utilizando tecnologias consolidadas e amplamente adotadas na comunidade de software:
+**Backend:**
+- Python 3.10+
+- FastAPI
+- SQLAlchemy + SQLite
+- Pydantic
+
+**Frontend:**
+- React 18+
+- Next.js 14
+- Tailwind CSS
+- Framer Motion (animações)
+
+---
+
+## 📞 Suporte
+
+Dúvidas ou problemas?
+- Abra uma issue no repositório
+- Consulte a documentação específica
+- Entre em contato pelo email do projeto
+
+---
+
+<div align="center">
+
+**Retratos de Bonito — Preservando a memória de gerações** 📸✨
+
+</div>
+
 
 - Linguagem Python
 - API REST com FastAPI
