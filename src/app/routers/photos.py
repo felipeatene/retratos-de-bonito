@@ -9,6 +9,8 @@ from app.services.person_link_service import add_person_to_photo
 from app.schemas.photo_curation import CuratePhotoRequest
 from app.repositories.photo_repository import update_photo_curation
 from app.models.photo import Photo
+from app.repositories.photo_person_repository import list_people_by_photo
+from app.schemas.photo_people import PhotoPersonResponse
 
 router = APIRouter(prefix="/photos", tags=["Fotos"])
 
@@ -87,3 +89,27 @@ def curate_photo(
         "visibility": photo.visibility,
         "curated": True
     }
+
+
+@router.get("/{photo_id}/people", response_model=list[PhotoPersonResponse])
+def get_people_from_photo(
+    photo_id: int,
+    db: Session = Depends(get_db)
+):
+    photo = db.query(Photo).filter(Photo.id == photo_id).first()
+    if not photo:
+        raise HTTPException(status_code=404, detail="Foto não encontrada")
+
+    people = list_people_by_photo(db, photo_id)
+
+    return [
+        PhotoPersonResponse(
+            person_id=p.id,
+            full_name=p.full_name,
+            nickname=p.nickname,
+            birth_year=p.birth_year,
+            death_year=p.death_year,
+            role=p.role
+        )
+        for p in people
+    ]
