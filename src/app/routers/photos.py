@@ -4,6 +4,11 @@ from sqlalchemy.orm import Session
 from app.dependencies.db import get_db
 from app.services.photo_storage import calculate_hash, save_photo_file
 from app.repositories.photo_repository import get_by_hash, create_photo
+from app.schemas.person_link import LinkPersonToPhotoRequest
+from app.services.person_link_service import add_person_to_photo
+from app.schemas.photo_curation import CuratePhotoRequest
+from app.repositories.photo_repository import update_photo_curation
+from app.models.photo import Photo
 
 router = APIRouter(prefix="/photos", tags=["Fotos"])
 
@@ -39,4 +44,46 @@ async def upload_photo(
         "status": "upload_realizado",
         "photo_status": photo.status,
         "visibility": photo.visibility
+    }
+
+
+@router.post("/{photo_id}/people")
+def add_person(
+    photo_id: int,
+    payload: LinkPersonToPhotoRequest,
+    db: Session = Depends(get_db)
+):
+    # delega toda a lógica ao serviço
+    return add_person_to_photo(db, photo_id, payload)
+
+
+@router.patch("/{photo_id}/curate")
+def curate_photo(
+    photo_id: int,
+    payload: CuratePhotoRequest,
+    db: Session = Depends(get_db)
+):
+    photo = db.query(Photo).filter(Photo.id == photo_id).first()
+    if not photo:
+        raise HTTPException(status_code=404, detail="Foto não encontrada")
+
+    if not payload.status and not payload.visibility:
+        raise HTTPException(
+            status_code=400,
+            detail="Nenhuma alteração de curadoria informada"
+        )
+
+    photo = update_photo_curation(
+        db,
+        photo=photo,
+        status=payload.status,
+        visibility=payload.visibility,
+        curator_name=payload.curator_name
+    )
+
+    return {
+        "photo_id": photo.id,
+        "status": photo.status,
+        "visibility": photo.visibility,
+        "curated": True
     }
