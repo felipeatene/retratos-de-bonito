@@ -47,6 +47,14 @@ frontend/out/
 frontend/.cache/
 frontend/.swc/
 frontend/.env*
+# Next.js em src/frontend (estrutura alternativa)
+src/frontend/node_modules/
+src/frontend/.next/
+src/frontend/.turbo/
+src/frontend/out/
+src/frontend/.cache/
+src/frontend/.swc/
+src/frontend/.env*
 
 # Variáveis de ambiente
 .env
