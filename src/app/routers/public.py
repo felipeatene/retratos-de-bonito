@@ -13,6 +13,7 @@ from app.schemas.public_photo_detail import (
 )
 from app.repositories.story_repository import list_public_stories_by_photo
 from app.schemas.story import StoryResponse
+from app.schemas.expo import ExpoPhotoResponse
 
 router = APIRouter(prefix="/public", tags=["Busca Pública"]) 
 
@@ -111,3 +112,42 @@ def get_public_photo(photo_id: int, db: Session = Depends(get_db)):
 @router.get("/photos/{photo_id}/stories", response_model=list[StoryResponse])
 def get_public_photo_stories(photo_id: int, db: Session = Depends(get_db)):
     return list_public_stories_by_photo(db, photo_id)
+
+
+@router.get("/expo", response_model=list[ExpoPhotoResponse])
+def get_public_expo(
+    mode: str = "timeline",
+    per_decade: int = 6,
+    db: Session = Depends(get_db)
+):
+    """
+    Endpoint para o modo exposição.
+
+    Atualmente suporta `mode=timeline`, retornando até `per_decade` fotos por década,
+    em ordem cronológica, com campos mínimos para exibição pública.
+    """
+    try:
+        if mode == "timeline":
+            timeline = timeline_by_decade(db)
+            response: list[ExpoPhotoResponse] = []
+
+            for decade in sorted(timeline.keys()):
+                photos = timeline[decade][:max(1, per_decade)]
+                for p in photos:
+                    response.append(
+                        ExpoPhotoResponse(
+                            photo_id=p.id,
+                            file_name=p.file_name,
+                            description=p.description,
+                            decade=decade,
+                            location=p.location.name if p.location else None,
+                        )
+                    )
+
+            return response
+
+        # Fallback simples: se modo não suportado, retorna lista vazia
+        return []
+    except Exception:
+        # Nunca travar em erro no modo exposição
+        return []

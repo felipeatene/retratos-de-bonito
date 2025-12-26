@@ -1,0 +1,63 @@
+# --- Projeto Retratos de Bonito ---
+# Ignorar ambientes, caches, binários e dados locais
+
+# Python env e caches
+.venv/
+venv/
+env/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# FastAPI/Build/Dist
+build/
+dist/
+
+# Logs e SO
+*.log
+.DS_Store
+Thumbs.db
+
+# Banco de dados local
+retratos.db
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Storage local de fotos (não versionar)
+storage/**
+!storage/.gitkeep
+
+# VS Code / IDEs
+.vscode/
+.idea/
+
+# Next.js / Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/.turbo/
+frontend/out/
+frontend/.cache/
+frontend/.swc/
+frontend/.env*
+
+# Variáveis de ambiente
+.env
+.env.*
+
+# Monorepo aux
+.pnpm-store/
+.yarn/
+.npm/
+
+# Arquivos temporários
+*.tmp
+*.temp
+~$*

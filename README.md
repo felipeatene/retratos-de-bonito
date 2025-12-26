@@ -4,7 +4,6 @@
 
 ### Acervo Fotográfico Cultural • Memória • Identidade • Pertencimento
 
-💧🌱📷  
 Preservação da memória visual de Bonito (MS),  
 com acesso seguro, consentido e uso ético da tecnologia.
 
@@ -12,42 +11,58 @@ com acesso seguro, consentido e uso ético da tecnologia.
 
 ---
 
-## Retratos de Bonito
+## 🚀 Quickstart
 
-**Retratos de Bonito** é um projeto de acervo fotográfico e preservação da memória cultural da cidade de Bonito, no estado de Mato Grosso do Sul.
+### Windows
+```cmd
+run.bat
+```
 
-A iniciativa tem como objetivo organizar, preservar e valorizar registros fotográficos históricos e contemporâneos da cidade, promovendo o acesso consciente à memória visual e fortalecendo o vínculo das pessoas com sua própria história e identidade local.
+### Linux / Mac
+```bash
+bash run.sh
+```
 
----
+Acesse:
+- **Frontend:** http://127.0.0.1:3000
+- **API:** http://127.0.0.1:8000
+- **Docs:** http://127.0.0.1:8000/docs
 
-## 1. Contextualização
-
-Ao longo das décadas, milhares de fotografias foram produzidas em Bonito, registrando eventos sociais, manifestações culturais, transformações urbanas, famílias e o cotidiano da população local.
-
-Grande parte desse material encontra-se dispersa em arquivos pessoais, mídias físicas antigas ou coleções não catalogadas, o que dificulta sua preservação, acesso e reconhecimento pelas pessoas que fazem parte dessas imagens.
-
-O projeto **Retratos de Bonito** surge como uma iniciativa cultural e tecnológica voltada à organização desse patrimônio visual, com foco na preservação histórica, no pertencimento comunitário e no uso responsável da tecnologia.
-
----
-
-## 2. Objetivos do Projeto
-
-### Objetivo Geral
-Criar um acervo digital estruturado de fotografias da cidade de Bonito, possibilitando a preservação da memória visual local e o acesso seguro às imagens pelas pessoas retratadas.
-
-### Objetivos Específicos
-- Preservar fotografias históricas e contemporâneas relacionadas à cidade de Bonito
-- Catalogar imagens de forma organizada e contextualizada
-- Permitir que pessoas se identifiquem e localizem fotografias em que aparecem
-- Incentivar a participação da comunidade no enriquecimento do acervo
-- Utilizar tecnologia de reconhecimento facial de forma ética, consentida e responsável
-- Garantir privacidade, segurança e controle de acesso às imagens
+### 🖥️ Modo Exposição
+- **URL:** http://127.0.0.1:3000/expo
+- **Fonte de dados:** GET /public/expo?mode=timeline
+- **Config:** defina `NEXT_PUBLIC_API_URL` apontando para a API (ex.: `http://127.0.0.1:8000`)
 
 ---
 
-## 3. Funcionamento Geral
+## 📁 Estrutura do Projeto
 
-O sistema permite que usuários realizem cadastro voluntário, fornecendo informações básicas de identificação e imagens de referência facial, utilizadas exclusivamente para fins de reconhecimento pessoal dentro do acervo.
+```
+src/
+├── app/                       # FastAPI Backend
+│   ├── main.py               # Entry point
+│   ├── database.py           # SQLite + SQLAlchemy
+│   ├── models/               # ORM (Photo, Person, Story, etc)
+│   ├── schemas/              # Pydantic schemas
+│   ├── repositories/         # Camada de dados
+│   ├── services/             # Lógica de negócio
+│   └── routers/              # Endpoints
+├── alembic/                  # Migrações de BD
+├── frontend_static/          # Frontend (HTML + JS estático)
+│   ├── index.html            # Timeline
+│   ├── search.html           # Busca pública
+│   ├── photo.html            # Detalhe + histórias
+│   └── api.js                # Helpers de fetch
+└── README.md
+
+scripts/                       # Utilitários (import, testes)
+storage/                       # Fotos originais
+retratos.db                    # Banco SQLite
+```
+
+---
+
+## 🔗 Endpoints Principais
 
 A partir desse cadastro, o sistema realiza a comparação entre as imagens de referência e o acervo fotográfico existente, possibilitando que cada usuário visualize fotografias em que aparece, respeitando critérios de privacidade e permissões de acesso.
 
