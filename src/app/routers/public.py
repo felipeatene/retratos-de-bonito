@@ -11,6 +11,8 @@ from app.schemas.public_photo_detail import (
     PublicPhotoDetailResponse,
     PublicPhotoPerson,
 )
+from app.repositories.story_repository import list_public_stories_by_photo
+from app.schemas.story import StoryResponse
 
 router = APIRouter(prefix="/public", tags=["Busca Pública"]) 
 
@@ -104,3 +106,8 @@ def get_public_photo(photo_id: int, db: Session = Depends(get_db)):
             for p in people
         ],
     )
+
+
+@router.get("/photos/{photo_id}/stories", response_model=list[StoryResponse])
+def get_public_photo_stories(photo_id: int, db: Session = Depends(get_db)):
+    return list_public_stories_by_photo(db, photo_id)

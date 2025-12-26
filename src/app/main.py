@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import photos, people, public, consents
+from app.routers import photos, people, public, consents, stories
 
 app = FastAPI(
     title="Retratos de Bonito",
@@ -11,3 +11,4 @@ app.include_router(photos.router)
 app.include_router(people.router)
 app.include_router(public.router)
 app.include_router(consents.router)
+app.include_router(stories.router)

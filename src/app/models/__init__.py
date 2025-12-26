@@ -8,6 +8,7 @@ from app.models.photo_person import PhotoPerson
 from app.models.photo_event import PhotoEvent
 from app.models.consent import Consent
 from app.models.audit_log import AuditLog
+from app.models.story import Story
 
 __all__ = [
     "PhotoStatus",
@@ -23,4 +24,5 @@ __all__ = [
     "PhotoEvent",
     "Consent",
     "AuditLog",
+    "Story",
 ]

@@ -17,6 +17,7 @@ from app.models import (
     PhotoPerson,
     PhotoEvent,
     Consent,
+    Story,
     AuditLog
 )
 
