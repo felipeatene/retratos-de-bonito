@@ -4,6 +4,8 @@ from app.models.photo_person import PhotoPerson
 from app.models.person import Person
 from app.models.location import Location
 from app.models.enums import PhotoStatus, Visibility
+from app.models.enums import ConsentType
+from app.models.consent import Consent
 
 
 def get_public_photo_detail(db: Session, photo_id: int):
@@ -29,7 +31,13 @@ def get_public_photo_detail(db: Session, photo_id: int):
             PhotoPerson.role,
         )
         .join(PhotoPerson, PhotoPerson.person_id == Person.id)
-        .filter(PhotoPerson.photo_id == photo.id)
+        .outerjoin(
+            Consent,
+            (Consent.photo_id == photo.id) & (Consent.person_id == Person.id),
+        )
+        .filter(
+            (Consent.consent_type == ConsentType.PUBLICO) | (Consent.id.is_(None))
+        )
         .all()
     )
 
