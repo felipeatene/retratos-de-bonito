@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import photos
+from app.routers import photos, people
 
 app = FastAPI(
     title="Retratos de Bonito",
@@ -8,3 +8,4 @@ app = FastAPI(
 )
 
 app.include_router(photos.router)
+app.include_router(people.router)

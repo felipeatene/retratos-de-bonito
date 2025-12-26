@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models.photo_person import PhotoPerson
 from app.models.person import Person
+from app.models.photo import Photo
 
 
 def link_exists(db: Session, photo_id: int, person_id: int) -> bool:
@@ -45,5 +46,22 @@ def list_people_by_photo(db: Session, photo_id: int):
         )
         .join(PhotoPerson, PhotoPerson.person_id == Person.id)
         .filter(PhotoPerson.photo_id == photo_id)
+        .all()
+    )
+
+
+def list_photos_by_person(db: Session, person_id: int):
+    return (
+        db.query(
+            Photo.id,
+            Photo.file_name,
+            Photo.description,
+            Photo.status,
+            Photo.visibility,
+            PhotoPerson.role,
+        )
+        .join(PhotoPerson, PhotoPerson.photo_id == Photo.id)
+        .filter(PhotoPerson.person_id == person_id)
+        .order_by(Photo.created_at.asc())
         .all()
     )
