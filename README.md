@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌿📸 Retratos de Bonito 💧
+# 🌿📸 Retratos de Bonito 💧💧
 
 **Museu Digital Comunitário — Preservação Ética da Memória Visual de Bonito (MS)**
 
