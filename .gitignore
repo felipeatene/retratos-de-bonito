@@ -1,6 +1,10 @@
 # --- Projeto Retratos de Bonito ---
 # Ignorar ambientes, caches, binários e dados locais
 
+# Documentação interna / análises técnicas (não publicar)
+.internal/
+.claude/
+
 # Python env e caches
 .venv/
 venv/

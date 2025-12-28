@@ -12,6 +12,7 @@ class Photo(Base):
 
     collection_id: Mapped[int | None] = mapped_column(ForeignKey("collections.id"))
     location_id: Mapped[int | None] = mapped_column(ForeignKey("locations.id"))
+    contributor_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"))
 
     file_name: Mapped[str] = mapped_column(String(255), nullable=False)
     file_path: Mapped[str] = mapped_column(String(500), nullable=False)
@@ -30,5 +31,6 @@ class Photo(Base):
 
     collection = relationship("Collection", back_populates="photos")
     location = relationship("Location", back_populates="photos")
+    contributor = relationship("User", backref="contributed_photos")
     people = relationship("PhotoPerson", back_populates="photo")
     events = relationship("PhotoEvent", back_populates="photo")

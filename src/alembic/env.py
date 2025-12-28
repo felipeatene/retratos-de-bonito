@@ -18,7 +18,9 @@ from app.models import (
     PhotoEvent,
     Consent,
     Story,
-    AuditLog
+    AuditLog,
+    Role,
+    User
 )
 
 config = context.config
